@@ -5,7 +5,7 @@ import sys
 imgRadius = 300
 numPins= 360
 initPin = 0
-numLines = 300
+numLines = 1000
 imgPath = 't_source.jpg'
 minLoop = 5
 lineWeight = 11
