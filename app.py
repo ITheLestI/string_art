@@ -1,11 +1,8 @@
 from flask import Flask, request, redirect, jsonify, flash, send_file, Response
 from flask_restful import Resource, Api, reqparse
-from werkzeug.utils import secure_filename
-import ast
 import numpy as np
 import cv2
 import os
-from alg import pinCoords, linePixels, maskImage, main
 
 app = Flask(__name__)
 api = Api(app)
@@ -43,7 +40,6 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file:
-            filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "t.jpg"))
         else:
             return "Wrong file", 200
