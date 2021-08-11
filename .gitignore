@@ -1,0 +1,11 @@
+*.png
+*.jpg
+*.svg
+__pycache__
+.vscode
+8563
+8570
+dynamic
+ssh*
+
+calc.py
