@@ -14,6 +14,7 @@ imgPath = 'pictures/t.jpg'
 minLoop = 5
 lineWeight = 11
 lineWidth = 3
+#234234234
 
 
 
