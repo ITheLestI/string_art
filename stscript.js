@@ -55,7 +55,7 @@ console.log('i', input)
 
 // This will upload the file after having read it
 const upload = (file) => {
-    document.getElementsByClassName("settings").setAttribute("disabled",true)
+    
     const formData = new FormData();
     formData.append('file', file);
     console.log("sending")

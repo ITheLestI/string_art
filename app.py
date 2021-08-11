@@ -32,11 +32,13 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+        settings = request.files['settings']
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
         if file:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "t.jpg"))
+            numLines = settings[0]
         else:
             return "Wrong file", 200
             
