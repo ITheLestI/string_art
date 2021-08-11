@@ -1,17 +1,15 @@
 from flask import Flask, request, redirect, jsonify, flash, send_file, Response
-from flask_restful import Resource, Api, reqparse
 import numpy as np
 import cv2
 import os
 
 app = Flask(__name__)
-api = Api(app)
-app.secret_key="security"
+app.secret_key="erfgLKJKLJGKLkjLKLGjlSSLKDgjl"
 
-imgRadius = 300
+imgRadius = 190
 numPins= 360
 initPin = 0
-numLines = 100
+numLines = 500
 imgPath = 'pictures/t.jpg'
 minLoop = 5
 lineWeight = 11
@@ -155,12 +153,12 @@ def main():
         '''sys.stdout.write("\b\b")
         sys.stdout.write("\r")
         sys.stdout.write("[+] Computing line " + str(line + 1) + " of " + str(numLines) + " total")
-        sys.stdout.flush()
+        sys.stdout.flush()'''
 
     #print("\n[+] Image threaded")
 
     # Wait for user and save before exit
-    #cv2.destroyAllWindows()'''
+    #cv2.destroyAllWindows()
     cv2.imwrite('./threaded.png', imgResult)
     #return imgResult
 
