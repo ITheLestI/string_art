@@ -16,8 +16,8 @@
 }
 .divcustum{
     position: absolute;
-    bottom: 100px;
-    right: 620px;
+    bottom: 120px;
+    right: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
