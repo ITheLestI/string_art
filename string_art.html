@@ -32,7 +32,7 @@
                 <input type="text" id="percentText" value="1" onchange="synchronizationPercentText();"
                     class="text settings">%
             </div> -->
-            <div  class="custom-">
+            <div class="custom-">
                 <button type="button" id="filesend"> Отправить</button>
                 <!-- <button type="button" id="clear" onclick="clearCanvas()">Очистить</button> -->
             </div>
@@ -40,12 +40,18 @@
         <!-- обещание -->
     </div>
     <div id="fileChoose">
-        <form id="myform" enctype="multipart/form-data" method="POST" action="http://192.168.214.44:5000">
+        <form id="myform" enctype="multipart/form-data" method="POST">
             <input type="file" id="file" name="file" accept="image/png, image/jpeg">
         </form>
     </div>
     <div id="loader"></div>
-    <div id="instructionButtonNext"></div>
-    <div id="instructionButtonPrevious"></div>
+    <div class="instruction">
+        <div id="instructionButtonPrevious"></div>
+    <div id="currectLine">
+        
+    </div>
+        <div id="instructionButtonNext"></div>
+    </div>
+    <input id="checkbox" type="checkbox" onchange="checkbox()">
 </body>
 <script src="script.js" type="text/javascript"></script>
