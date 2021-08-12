@@ -22,11 +22,6 @@
     flex-direction: column;
     justify-content: space-around;
 }
-#canvas{
-/* position: absolute;
-right: 530px ;
-bottom: 235px;     */
-}
 .all{
     height: 50px;
 }
