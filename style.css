@@ -1,6 +1,7 @@
 .custumizator{
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 .submit{
     width: 90px;
@@ -11,17 +12,20 @@
     top: 50px;
 }
 .text{
-    width: 25px;
+    width: 30px;
 }
 .divcustum{
     position: absolute;
     bottom: 100px;
     right: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 #canvas{
-position: absolute;
+/* position: absolute;
 right: 530px ;
-bottom: 235px;    
+bottom: 235px;     */
 }
 .all{
     height: 50px;
@@ -38,10 +42,28 @@ bottom: 235px;
 #filesend{
     width: 85px;
 }
-#clear{
-    width: 85px;
-}
 .options{
     display: flex;
     flex-direction: row;
+}
+.loader {
+    position: absolute;
+    top: 160px;
+    left: 565px;
+    border: 10px solid #b3a8a8; /* Light grey */
+    border-top: 10px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.custom-{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

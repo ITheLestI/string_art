@@ -32,6 +32,8 @@ function synchronizationlineNumText() {
 }
 function clearCanvas() {
     ctx.clearRect(0, 0, 383, 383);
+    ctx.lineWidth = 1
+    ctx.beginPath()
     ctx.arc(190, 190, 190, 0, (2 * Math.PI), false);
     ctx.setLineDash([3]);
     ctx.stroke()
@@ -39,6 +41,7 @@ function clearCanvas() {
 }
 canv = document.getElementById("canvas");
 ctx = canv.getContext("2d");
+ctx.beginPath()
 ctx.arc(190, 190, 190, 0, (2 * Math.PI), false);
 ctx.setLineDash([3]);
 ctx.stroke()
@@ -49,16 +52,24 @@ ctx.setLineDash([0])
 
 
 var result
+function change() {
+    if (result) {
+        afterResponse(result)
+    }
+}
 function afterResponse(succes) {
+    document.getElementById("loader").setAttribute("class", "y")
     result = succes
-    //ctx.lineWidth = document.getElementById("lineWidthRange")
+    clearCanvas()
+    ctx.lineWidth = document.getElementById("lineWidthRange").value
     for (var i = 0; i < result.length; i++) {
         console.log(ctx.lineWidth)
         ctx.moveTo(result[i][0][0], result[i][0][1]);
         ctx.lineTo(result[i][1][0], result[i][1][1]);
-        ctx.lineWidth = document.getElementById("lineWidthRange").value
+        // ctx.lineWidth = document.getElementById("lineWidthRange").value
     }
     ctx.stroke()
+    ctx.closePath()
 
 }
 // Select your input type file and store it in a variable
@@ -67,13 +78,15 @@ console.log('i', input)
 
 // This will upload the file after having read it
 const upload = (file) => {
+    clearCanvas()
+    document.getElementById("loader").setAttribute("class", "loader")
     var settings = [document.getElementById("lineNumText").value]
     const formData = new FormData();
     formData.append('file', file);
     formData.append('json', JSON.stringify(settings));
     console.log("sending")
 
-    fetch('http://192.168.235.99:5000/', { // Your POST endpoint
+    fetch('http://192.168.245.94:5000/', { // Your POST endpoint
         method: 'POST',
         body: formData, // This is your file object
         // headers: {
@@ -92,9 +105,17 @@ const upload = (file) => {
 
 
 // Event handler executed when a file is selected
-const onSelectFile = () => upload(input.files[0]);
+const onSelectFile = () => {
+    if (input.files[0]) {
+        upload(input.files[0])
+    }
+    else{
+        alert("Выберите файл")
+    }
+};
 const submit = document.getElementById("filesend")
 submit.addEventListener("click", onSelectFile, false)
+
 // submit.addEventListener("click", clearCanvas, false)
 // Add a listener on your input
 // It will be triggered when a file will be selected
