@@ -31,3 +31,17 @@ bottom: 235px;
     left: 850px;
     top: 40px;
 }
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+#filesend{
+    width: 85px;
+}
+#clear{
+    width: 85px;
+}
+.options{
+    display: flex;
+    flex-direction: row;
+}

@@ -20,18 +20,21 @@
                 <input type="text" id="lineNumText" value="500" onchange="synchronizationlineNumText" ();"
                     class="text settings" maxlength="11">
             </div>
-            <div><input type="range" min="-50" max="50" step="1" value="0" id="horizontalRange"
-                    onchange="synchronizationHorizontalRange();" class="settings">
-                <input type="text" id="horizontalText" value="0" onchange="synchronizationHorizontalText();"
+            <div><input type="range" min="0.1" max="1" step="0.1" value="0.3" id="lineWidthRange"
+                    onchange="synchronizationlineWidthRange();" class="settings">
+                <input type="text" id="lineWidthText" value="0.3" onchange="synchronizationlineWidthText();"
                     class="text settings">
             </div>
-            <div>
+            <!-- <div>
                 <input type="range" min="1" max="100" step="1" value="1" id="percentRange"
                     onchange="synchronizationPercentRange();" class="settings">
                 <input type="text" id="percentText" value="1" onchange="synchronizationPercentText();"
                     class="text settings">%
+            </div> -->
+            <div class="buttons">
+                <button type="button" id="filesend"> Отправить</button>
+                <button id="clear">Очистить</button>
             </div>
-            <button type="button" id="filesend"> Отправить</button>
         </form>
         <!-- обещание -->
     </div>
