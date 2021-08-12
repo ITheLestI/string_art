@@ -82,7 +82,7 @@ const upload = (file) => {
     formData.append('json', JSON.stringify(settings));
     console.log("sending2")
 
-    fetch('http://192.168.239.72:5000/', { // Your POST endpoint
+    fetch('http://192.168.239.64:5000/', { // Your POST endpoint
         method: 'POST',
         body: formData, // This is your file object
         // headers: {
