@@ -14,31 +14,35 @@
     <div class="fileChoose"><input type="file" accept="image/*">
     </div>
     <div class="divcustum">
-        <form class="custumizator">
+        <form class="custumizator" id="custumizator" method="POST">
             <div>
-                <input type="range" min="-50" max="50" step="1" value="0" id="verticalRange"
-                    onchange="synchronizationVerticalRange();" class="settings">
-                <input type="text" id="verticalText" value="0" onchange="synchronizationVerticalText();" class="text settings">
+                <input type="range" min="100" max="1000" step="1" value="500" id="lineNumRange"
+                    onchange="synchronizationlineNumRange();" class="settings">
+                <input type="text" id="lineNumText" value="500" onchange="synchronizationlineNumText" ();"
+                    class="text settings" maxlength="11">
             </div>
             <div><input type="range" min="-50" max="50" step="1" value="0" id="horizontalRange"
                     onchange="synchronizationHorizontalRange();" class="settings">
-                    <input type="text" id="horizontalText" value="0"
-                    onchange="synchronizationHorizontalText();" class="text settings"></div>
+                <input type="text" id="horizontalText" value="0" onchange="synchronizationHorizontalText();"
+                    class="text settings">
+            </div>
             <div>
                 <input type="range" min="1" max="100" step="1" value="1" id="percentRange"
-                    onchange="synchronizationPercentRange();"class="settings">
-                    <input type="text" id="percentText" value="1"
-                    onchange="synchronizationPercentText();" class="text settings">%</div>
-            <input class="submit" type="submit" id="submit">
+                    onchange="synchronizationPercentRange();" class="settings">
+                <input type="text" id="percentText" value="1" onchange="synchronizationPercentText();"
+                    class="text settings">%
+            </div>
+            <button type="button" id="filesend"> Отправить</button>
         </form>
         <!-- обещание -->
     </div>
     <div>
-        <form id="myform" enctype="multipart/form-data" method="post" action="http://192.168.214.44:5000/">
+        <form id="myform" enctype="multipart/form-data" method="POST">
             <input type="file" id="file" name="file">
+
         </form>
     </div>
 
     <canvas id="canvas" width="383" height="383"></canvas>
 </body>
-<script src="stscript.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
