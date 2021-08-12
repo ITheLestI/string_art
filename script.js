@@ -4,21 +4,38 @@ ctx = canv.getContext("2d");
 function checkbox() {
     if (result) {
         if (document.getElementById("checkbox").checked) {
+            document.getElementById("lineNumRange").disabled = true
+            document.getElementById("lineNumText").disabled = true
+            document.getElementById("lineWidthRange").disabled = true
+            document.getElementById("lineWidthText").disabled = true
+            document.getElementById("filesend").disabled = true
+            document.getElementById("file").disabled = true
             createInstructionButtons()
-            document.getElementById("currectline").innerText=currectLine
+            document.getElementById("currectLine").innerText = currectLine + 1
             clearCanvas()
-            ctx.moveTo(result[currectLine][0][0], result[currectLine][0][1])
-            ctx.lineTo(result[currectLine][1][0], result[currectLine][1][1])
+            ctx.moveTo(result[0][currectLine][0][0], result[0][currectLine][0][1])
+            ctx.lineTo(result[0][currectLine][1][0], result[0][currectLine][1][1])
             ctx.stroke()
+            if (result[1][currectLine]){
+                var currectLine
+                document.getElementById("instruct1").innerText="Шаг "+currectLine+1+": "+result[1][currectLine][0]+" - "+result[1][currectLine][1]
+            }
         }
         else {
             deleteButtons()
-            document.getElementById("currectLine").innerText=null
+            clearCanvas()
+            document.getElementById("lineNumRange").disabled = false
+            document.getElementById("lineNumText").disabled = false
+            document.getElementById("lineWidthRange").disabled = false
+            document.getElementById("lineWidthText").disabled = false
+            document.getElementById("filesend").disabled = false
+            document.getElementById("file").disabled = false
+            document.getElementById("currectLine").innerText = null
             ctx.lineWidth = document.getElementById("lineWidthRange").value
-            for (var i = 0; i < result.length; i++) {
-                ctx.moveTo(result[i][0][0], result[i][0][1]);
-                ctx.lineTo(result[i][1][0], result[i][1][1]);
-                
+            for (var i = 0; i < result[0].length; i++) {
+                ctx.moveTo(result[0][i][0][0], result[0][i][0][1]);
+                ctx.lineTo(result[0][i][1][0], result[0][i][1][1]);
+
                 // ctx.lineWidth = document.getElementById("lineWidthRange").value
             }
             ctx.stroke()
@@ -26,12 +43,12 @@ function checkbox() {
     }
 }
 function increment() {
-    if (currectLine < result.length - 1) {
+    if (currectLine < result[0].length - 1) {
         currectLine++
         document.getElementById("currectLine").innerText = currectLine + 1
         clearCanvas()
-        ctx.moveTo(result[currectLine][0][0], result[currectLine][0][1])
-        ctx.lineTo(result[currectLine][1][0], result[currectLine][1][1])
+        ctx.moveTo(result[0][currectLine][0][0], result[0][currectLine][0][1])
+        ctx.lineTo(result[0][currectLine][1][0], result[0][currectLine][1][1])
         ctx.stroke()
     }
 }
@@ -40,8 +57,8 @@ function decrement() {
         currectLine--
         document.getElementById("currectLine").innerText = currectLine + 1
         clearCanvas()
-        ctx.moveTo(result[currectLine][0][0], result[currectLine][0][1])
-        ctx.lineTo(result[currectLine][1][0], result[currectLine][1][1])
+        ctx.moveTo(result[0][currectLine][0][0], result[0][currectLine][0][1])
+        ctx.lineTo(result[0][currectLine][1][0], result[0][currectLine][1][1])
         ctx.stroke()
     }
 }
