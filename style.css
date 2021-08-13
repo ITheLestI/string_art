@@ -4,6 +4,21 @@ body {
 	background-size: 200% 200%;
 	animation: gradient 10s ease infinite;
 }
+a.button8 {
+	display: inline-block;
+	color: black;
+	font-weight: 700;
+	text-decoration: none;
+	user-select: none;
+	padding: .5em 2em;
+	outline: none;
+	border: 2px solid;
+	border-radius: 1px;
+	transition: 0.2s;
+} 
+a.button8:hover { background: #ffee70; }
+a.button8:active { background: white; }
+
 
 .custumizator{
     display: flex;
