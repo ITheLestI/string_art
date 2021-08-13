@@ -18,7 +18,7 @@ function checkbox() {
             ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
             ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
             ctx.stroke()
-            document.getElementById("currentLine").innerText = (currentLine + 1)
+
             if (result[1][currentLine][0] + 91 > 360) {
                 from = result[1][currentLine][0] - 269
             }
@@ -43,7 +43,6 @@ function checkbox() {
             document.getElementById("lineWidthText").disabled = false
             document.getElementById("filesend").disabled = false
             document.getElementById("file").disabled = false
-            document.getElementById("currentLine").innerText = null
             ctx.lineWidth = document.getElementById("lineWidthRange").value
             for (var i = 0; i < result[0].length; i++) {
                 ctx.moveTo(result[0][i][0][0], result[0][i][0][1]);
@@ -59,7 +58,7 @@ function checkbox() {
 function increment() {
     if (currentLine < result[0].length - 1) {
         currentLine++
-        document.getElementById("currentLine").innerText = currentLine + 1
+        
         clearCanvas()
         
         if (result[1][currentLine][0] + 91 > 360) {
@@ -86,7 +85,6 @@ function increment() {
 function decrement() {
     if (currentLine > 0) {
         currentLine--
-        document.getElementById("currentLine").innerText = currentLine + 1
         clearCanvas()
         ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
         ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
@@ -110,7 +108,6 @@ function decrement() {
 function createInstructionButtons() {
     document.getElementById("instructionButtonNext").innerHTML = "<button>next</button>"
     document.getElementById("instructionButtonPrevious").innerHTML = "<button>previous</button>"
-    document.getElementById("currentLine").innerText = currentLine + 1
     document.getElementById("instructionButtonPrevious").setAttribute("onclick", "decrement()")
     document.getElementById("instructionButtonNext").setAttribute("onclick", "increment()")
 }
