@@ -65,8 +65,8 @@ a.button8:active { background: white; }
 }
 .loader {
     position: absolute;
-    top: 265px;
-    left: 810px;
+    top: 220px;
+    left: 600px;
     border: 10px solid #7d7d7d; /* Dark grey */
     border-top: 10px solid #ffea00; /* Yellow */
     border-radius: 50%;

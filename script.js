@@ -1,16 +1,7 @@
-const ip = 'http://192.168.239.28:5000/'
+const ip = 'http://192.168.203.218:5000/'
 var currentLine
 var from
 var to
-window.onload = () => {
-		const uploadFile = document.getElementById("file");
-		const uploadBtn = document.getElementById("upload-btn");
-		
-		uploadBtn.addEventListener("click", function () {
-			uploadFile.click();
-		});
-		
-}
 
 canv = document.getElementById("canvas");
 ctx = canv.getContext("2d");
