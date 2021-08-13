@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, jsonify, flash, send_file, Response
+from json import loads
 import numpy as np
 import cv2
 import os
@@ -8,8 +9,8 @@ app.secret_key="erfgLKJKLJGKLkjLKLGjlSSLKDgjl"
 
 imgRadius = 190
 numPins= 360
-initPin = 0
-numLines = 500
+initPin = 270
+numLines = 100
 imgPath = 'pictures/t.jpg'
 minLoop = 5
 lineWeight = 11
@@ -31,18 +32,21 @@ def upload_file():
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
-        settings = request.files['settings']
+        file = request.files["file"]
+        json = request.form["json"]
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
         if file:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "t.jpg"))
-            numLines = settings[0]
+            print("Received an post request")
+            global numLines
+            numLines = int(loads(json)[0])
         else:
             return "Wrong file", 200
             
     return jsonify(main()) #send_file("threaded.png")
+
 
 def maskImage(image, radius):
     y, x = np.ogrid[-radius:radius + 1, -radius:radius + 1]
@@ -74,6 +78,7 @@ def linePixels(pin0, pin1):
     return (x.astype(int)-1, y.astype(int)-1)
 
 def main():
+    global numLines
     image = cv2.imread(imgPath)
     height, width = image.shape[0:2]
     minEdge= min(height, width)
@@ -188,7 +193,7 @@ def main():
     svg_output.write(pather(d).encode('utf8'))
     svg_output.write(footer.encode('utf8'))
     svg_output.close()'''
-    return strings
+    return strings, lines
 
 @app.after_request
 def apply_caching(resp):
