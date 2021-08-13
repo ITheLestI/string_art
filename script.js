@@ -1,5 +1,7 @@
 const ip = 'http://192.168.239.28:5000/'
 var currentLine
+var from
+var to
 canv = document.getElementById("canvas");
 ctx = canv.getContext("2d");
 function checkbox() {
@@ -17,12 +19,22 @@ function checkbox() {
             ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
             ctx.stroke()
             document.getElementById("currentLine").innerText = (currentLine + 1)
-            if (result[1][currentLine]) {
-                document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + result[1][currentLine][0] + " - " + result[1][currentLine][1]
+            if (result[1][currentLine][0] + 91 > 360) {
+                from = result[1][currentLine][0] - 269
             }
+            else {
+                from = result[1][currentLine][0] + 91
+            }
+            if (result[1][currentLine][1] + 91 > 360) {
+                to = result[1][currentLine][1] - 269
+            }
+            else {
+                to = result[1][currentLine][1] + 91
+            }
+            document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
         }
         else {
-            document.getElementById("instruct1").innerText =null
+            document.getElementById("instruct1").innerText = null
             deleteButtons()
             clearCanvas()
             document.getElementById("lineNumRange").disabled = false
@@ -39,7 +51,7 @@ function checkbox() {
 
                 // ctx.lineWidth = document.getElementById("lineWidthRange").value
             }
-            
+
             ctx.stroke()
         }
     }
@@ -49,12 +61,26 @@ function increment() {
         currentLine++
         document.getElementById("currentLine").innerText = currentLine + 1
         clearCanvas()
+        
+        if (result[1][currentLine][0] + 91 > 360) {
+            from = result[1][currentLine][0] - 269
+        }
+        else {
+            from = result[1][currentLine][0] + 91
+        }
+        if (result[1][currentLine][1] + 91 > 360) {
+            to = result[1][currentLine][1] - 269
+        }
+        else {
+            to = result[1][currentLine][1] + 91
+        }
+
         ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
         ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
         ctx.stroke()
-        if (result[1][currentLine]) {
-            document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + result[1][currentLine][0] + " - " + result[1][currentLine][1]
-        }
+
+
+        document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
     }
 }
 function decrement() {
@@ -65,9 +91,20 @@ function decrement() {
         ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
         ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
         ctx.stroke()
-        if (result[1][currentLine]) {
-            document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + result[1][currentLine][0] + " - " + result[1][currentLine][1]
+
+        if (result[1][currentLine][0] + 91 > 360) {
+            from = result[1][currentLine][0] - 269
         }
+        else {
+            from = result[1][currentLine][0] + 91
+        }
+        if (result[1][currentLine][1] + 91 > 360) {
+            to = result[1][currentLine][1] - 269
+        }
+        else {
+            to = result[1][currentLine][1] + 91
+        }
+        document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
     }
 }
 function createInstructionButtons() {
