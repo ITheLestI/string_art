@@ -9,7 +9,7 @@ app.secret_key="erfgLKJKLJGKLkjLKLGjlSSLKDgjl"
 
 imgRadius = 190
 numPins= 360
-initPin = 0
+initPin = 270
 numLines = 100
 imgPath = 'pictures/t.jpg'
 minLoop = 5
@@ -47,21 +47,6 @@ def upload_file():
             
     return jsonify(main()) #send_file("threaded.png")
 
-@app.route("/", methods=["PUT"])
-def put():
-    if request.method == 'PUT':
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.json['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file:
-            numLines = load(file)[0]
-        else:
-            return "Wrong file", 200
-    return None, 200
 
 def maskImage(image, radius):
     y, x = np.ogrid[-radius:radius + 1, -radius:radius + 1]
@@ -208,7 +193,7 @@ def main():
     svg_output.write(pather(d).encode('utf8'))
     svg_output.write(footer.encode('utf8'))
     svg_output.close()'''
-    return strings
+    return strings, lines
 
 @app.after_request
 def apply_caching(resp):
@@ -219,5 +204,5 @@ def apply_caching(resp):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
