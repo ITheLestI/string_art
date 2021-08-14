@@ -18,7 +18,7 @@ lineWidth = 3
 
 
 
-UPLOAD_FOLDER = 'E:/Coding/pictures'
+UPLOAD_FOLDER = './pictures'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/", methods=["GET", "OPTIONS"])
