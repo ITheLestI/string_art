@@ -1,4 +1,4 @@
-const ip = 'http://192.168.203.218:5000/'
+const ip = 'http://localhost:5000/'
 var currentLine
 var from
 var to

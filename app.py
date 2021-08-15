@@ -38,6 +38,8 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file:
+            if not os.path.exists("./pictures"):
+                os.mkdir("./pictures")
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], "t.jpg"))
             print("Received an post request")
             global numLines
