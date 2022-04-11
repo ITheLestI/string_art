@@ -48,7 +48,7 @@ def upload_file():
         else:
             return "Wrong file", 200
 
-    return jsonify(main())  # send_file("threaded.png")
+    return jsonify(main())  # send_file("threaded.png") in coords
 
 
 def maskImage(image, radius):
