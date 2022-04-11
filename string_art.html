@@ -9,17 +9,23 @@
 </head>
 
 <body>
+    <div class="fileChoose">
+        <form id="myform" enctype="multipart/form-data" method="POST">
+            <input type="file" id="file" name="file" accept="image/png, image/jpeg">
+    </form>
+    </div>
     </div>
     <div class="divcustum">
         <canvas id="canvas" width="383" height="383"></canvas>
         <form class="custumizator" id="custumizator" method="POST">
             <div class="custom-">
-                <input type="range" class="slider" min="100" max="1000" step="1" value="500" id="lineNumRange"
+                Количество нитей<input type="range" class="slider" min="100" max="1000" step="1" value="500" id="lineNumRange"
                     onchange="synchronizationlineNumRange();" class="settings">
                 <input type="text" id="lineNumText" value="500" onchange="synchronizationlineNumText" ();"
                     class="text settings" maxlength="11">
             </div>
-            <div class="custom-"><input type="range" class="slider" min="0.1" max="1" step="0.1" value="0.3" id="lineWidthRange"
+            <div class="custom-">
+                &nbsp;&nbsp;&nbsp;Толщина нитей&nbsp;&nbsp;&nbsp;<input type="range" class="slider" min="0.1" max="1" step="0.1" value="0.3" id="lineWidthRange"
                     onchange="synchronizationlineWidthRange();change()" class="settings">
                 <input type="text" id="lineWidthText" value="0.3" onchange="synchronizationlineWidthText();change()"
                     class="text settings">
@@ -36,13 +42,10 @@
                 <!-- <button type="button" id="clear" onclick="clearCanvas()">Очистить</button> -->
             </div>
         </form>
-        <!-- обещание -->
+        
     </div>
-    <div id="fileChoose">
-        <form id="myform" enctype="multipart/form-data" method="POST">
-            <input type="file" id="file" name="file" accept="image/png, image/jpeg">
-        </div>
-    </form>
+    
+    
     <div id="loader"></div>
 
 

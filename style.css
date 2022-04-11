@@ -1,8 +1,8 @@
 body {
 	background-color: grey;
-	background: linear-gradient(90deg,#C9D6FF, #E2E2E2); /*#C9D6FF #E2E2E2 #92aaf7,white*/
+	background: linear-gradient(90deg,#4290bd, #dfe0e0);/* #C9D6FF #E2E2E2 #92aaf7,white */
 	background-size: 200% 200%;
-	animation: gradient 10s ease infinite;
+	animation: gradient 10s ease infinite; 
 }
 a.button8 {
 	display: inline-block;
@@ -27,30 +27,36 @@ a.button8:active { background: white; }
 }
 .submit{
     width: 90px;
+	
+}
+canvas {
+	margin-top: 3em;
+	padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 .fileChoose{
-    position: absolute;
-    right: 200px;
-    top: 50px;
+	position: absolute;
+    left: 10px;
+    top: 40px;
+	
 }
 .text{
     width: 30px;
 }
-.divcustum{
+/*.divcustum{
+
     position: absolute;
     bottom: 120px;
-    right: 500px;
+    right: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-}
+}*/
 .all{
     height: 50px;
-}
-#fileChoose{
-    position: absolute;
-    left: 850px;
-    top: 40px;
 }
 .buttons{
     display: flex;
@@ -65,8 +71,10 @@ a.button8:active { background: white; }
 }
 .loader {
     position: absolute;
-    top: 220px;
-    left: 600px;
+    top: 23%;
+    left: 48%;
+
+
     border: 10px solid #7d7d7d; /* Dark grey */
     border-top: 10px solid #ffea00; /* Yellow */
     border-radius: 50%;
@@ -82,7 +90,9 @@ a.button8:active { background: white; }
 .custom-{
     display: flex;
     flex-direction: row;
+	justify-self: center;
     justify-content: center;
+	
 }
 .instruction{
     display: flex;
@@ -111,6 +121,7 @@ a.button8:active { background: white; }
 .slider {
 	-webkit-appearance: none;
 	width: 50%;
+	max-width: 320px;
 	height: 15px;
 	border-radius: 5px;
 	border-color: black;

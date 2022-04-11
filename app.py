@@ -1,14 +1,14 @@
-from flask import Flask, request, redirect, jsonify, flash, send_file, Response
+from flask import Flask, request, redirect, jsonify, flash, Response
 from json import loads
 import numpy as np
 import cv2
 import os
 
 app = Flask(__name__)
-app.secret_key="erfgLKJKLJGKLkjLKLGjlSSLKDgjl"
+app.secret_key = "erfgLKJKLJGKLkjLKLGjlSSLKDgjl"
 
 imgRadius = 190
-numPins= 360
+numPins = 360
 initPin = 270
 numLines = 100
 imgPath = 'pictures/t.jpg'
@@ -17,14 +17,15 @@ lineWeight = 11
 lineWidth = 3
 
 
-
 UPLOAD_FOLDER = './pictures'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 @app.route("/", methods=["GET", "OPTIONS"])
 def get():
-    resp = Response("This is response!")
+    resp = Response("Ready for processing data!")
     return resp
+
 
 @app.route('/', methods=['POST'])
 def upload_file():
@@ -46,8 +47,8 @@ def upload_file():
             numLines = int(loads(json)[0])
         else:
             return "Wrong file", 200
-            
-    return jsonify(main()) #send_file("threaded.png")
+
+    return jsonify(main())  # send_file("threaded.png")
 
 
 def maskImage(image, radius):
@@ -56,6 +57,7 @@ def maskImage(image, radius):
     image[mask] = 0
 
     return image
+
 
 def pinCoords(radius, numPins=200, offset=0, x0=None, y0=None):
     alpha = np.linspace(0 + offset, 2*np.pi + offset, numPins + 1)
@@ -72,6 +74,7 @@ def pinCoords(radius, numPins=200, offset=0, x0=None, y0=None):
         coords.append((x, y))
     return coords
 
+
 def linePixels(pin0, pin1):
     length = int(np.hypot(pin1[0] - pin0[0], pin1[1] - pin0[1]))
 
@@ -79,27 +82,28 @@ def linePixels(pin0, pin1):
     y = np.linspace(pin0[1], pin1[1], length)
     return (x.astype(int)-1, y.astype(int)-1)
 
+
 def main():
     global numLines
     image = cv2.imread(imgPath)
     height, width = image.shape[0:2]
-    minEdge= min(height, width)
+    minEdge = min(height, width)
     topEdge = int((height - minEdge)/2)
     leftEdge = int((width - minEdge)/2)
     imgCropped = image[topEdge:topEdge + minEdge, leftEdge:leftEdge+minEdge]
-    #cv2.imwrite('./cropped.png', imgCropped)
+    # cv2.imwrite('./cropped.png', imgCropped)
 
     imgGray = cv2.cvtColor(imgCropped, cv2.COLOR_BGR2GRAY)
-    #cv2.imwrite('./gray.png', imgGray)
+    # cv2.imwrite('./gray.png', imgGray)
 
     imgSized = cv2.resize(imgGray, (2*imgRadius + 1, 2*imgRadius + 1))
-    #cv2.imwrite("./sized.png", imgSized)
+    # cv2.imwrite("./sized.png", imgSized)
 
     imgInverted = 255-imgSized
-    #cv2.imwrite('./inverted.png', imgInverted)
+    # cv2.imwrite('./inverted.png', imgInverted)
 
     imgMasked = maskImage(imgInverted, imgRadius)
-    #cv2.imwrite('./masked.png', imgMasked)
+    # cv2.imwrite('./masked.png', imgMasked)
 
     coords = pinCoords(imgRadius, numPins)
     height, width = imgMasked.shape[0:2]
@@ -148,8 +152,6 @@ def main():
         xLine, yLine = linePixels(coords[bestPin], coord)
         strings.append([coords[bestPin], coord])
         imgResult[yLine, xLine] = 0
-        #cv2.imshow('image', imgResult)
-        #cv2.waitKey(1)
 
         # Break if no lines possible
         if bestPin == oldPin:
@@ -161,15 +163,15 @@ def main():
         # Print progress
         '''sys.stdout.write("\b\b")
         sys.stdout.write("\r")
-        sys.stdout.write("[+] Computing line " + str(line + 1) + " of " + str(numLines) + " total")
+        sys.stdout.write("[+] Computing line " + str(line + 1)
+                         + " of " + str(numLines) + " total")
         sys.stdout.flush()'''
 
-    #print("\n[+] Image threaded")
+    # print("\n[+] Image threaded")
 
     # Wait for user and save before exit
-    #cv2.destroyAllWindows()
-    cv2.imwrite('./threaded.png', imgResult)
-    #return imgResult
+    # cv2.imwrite('./threaded.png', imgResult)
+    # return imgResult
 
     #rgb_img = cv2.cvtColor(imgResult.astype('uint8'), cv2.COLOR_BGR2RGB)
     #plt.imshow(rgb_img)
@@ -197,14 +199,14 @@ def main():
     svg_output.close()'''
     return strings, lines
 
+
 @app.after_request
 def apply_caching(resp):
     resp.headers.set('Access-Control-Allow-Origin', '*')
     resp.headers['Access-Control-Allow-Headers'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = '*'
-    return resp   
+    return resp
 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-

@@ -106,6 +106,15 @@ function decrement() {
         document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
     }
 }
+
+function unlock() {
+    document.getElementById("lineNumRange").removeAttribute("disabled")
+    document.getElementById("lineNumText").removeAttribute("disabled")
+}
+function lock() {
+    document.getElementById("lineNumText").setAttribute("disabled", "")
+    document.getElementById("lineNumRange").setAttribute("disabled", "")
+}
 function createInstructionButtons() {
     document.getElementById("instructionButtonNext").innerHTML = "<button>next</button>"
     document.getElementById("instructionButtonPrevious").innerHTML = "<button>previous</button>"
@@ -171,6 +180,7 @@ function afterResponse(succes) {
 
     }
     document.getElementById("loader").setAttribute("class", "y")
+    
     result = succes
     clearCanvas()
     ctx.lineWidth = document.getElementById("lineWidthRange").value
@@ -181,11 +191,10 @@ function afterResponse(succes) {
 
 // Select your input type file and store it in a variable
 const input = document.getElementById('file');
-console.log('i', input)
-
 // This will upload the file after having read it
 const upload = (file) => {
     clearCanvas()
+    lock()
     document.getElementById("loader").setAttribute("class", "loader")
     var settings = [document.getElementById("lineNumText").value]
     const formData = new FormData();
@@ -214,6 +223,7 @@ const upload = (file) => {
 // Event handler executed when a file is selected
 const onSelectFile = () => {
     if (input.files[0]) {
+        
         upload(input.files[0])
     }
     else {
@@ -227,5 +237,3 @@ submit.addEventListener("click", onSelectFile, false)
 // Add a listener on your input
 // It will be triggered when a file will be selected
 
-
-// [[[откуда][куда]],[[][]],[[][]],[[][]]]
