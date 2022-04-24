@@ -2,5 +2,5 @@ __pycache__
 templates
 .vscode
 ssh*
-1.txt
+*.txt
 pictures/t.jpg

@@ -1,24 +1,25 @@
-const ip = 'http://194.87.210.8//'
-var currentLine
+const ip = 'http://194.87.210.8/'
 var from
 var to
+var currentLine = 0
 
 canv = document.getElementById("canvas");
 ctx = canv.getContext("2d");
+
 function checkbox() {
+    clearCanvas()
     if (result) {
         if (document.getElementById("checkbox").checked) {
+
             document.getElementById("lineNumRange").disabled = true
             document.getElementById("lineNumText").disabled = true
-            document.getElementById("lineWidthRange").disabled = true
-            document.getElementById("lineWidthText").disabled = true
+            //document.getElementById("lineWidthRange").disabled = true
+            //document.getElementById("lineWidthText").disabled = true
             document.getElementById("filesend").disabled = true
             document.getElementById("file").disabled = true
+            document.getElementById("inctruction_tip").hidden = false
             createInstructionButtons()
-            clearCanvas()
-            ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
-            ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
-            ctx.stroke()
+            currentLine = 0
 
             if (result[1][currentLine][0] + 91 > 360) {
                 from = result[1][currentLine][0] - 269
@@ -32,36 +33,33 @@ function checkbox() {
             else {
                 to = result[1][currentLine][1] + 91
             }
+            decrement()
             document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
         }
         else {
             document.getElementById("instruct1").innerText = null
             deleteButtons()
-            clearCanvas()
             document.getElementById("lineNumRange").disabled = false
             document.getElementById("lineNumText").disabled = false
             document.getElementById("lineWidthRange").disabled = false
             document.getElementById("lineWidthText").disabled = false
             document.getElementById("filesend").disabled = false
             document.getElementById("file").disabled = false
+            document.getElementById("inctruction_tip").hidden = true
             ctx.lineWidth = document.getElementById("lineWidthRange").value
-            for (var i = 0; i < result[0].length; i++) {
-                ctx.moveTo(result[0][i][0][0], result[0][i][0][1]);
-                ctx.lineTo(result[0][i][1][0], result[0][i][1][1]);
-
-                // ctx.lineWidth = document.getElementById("lineWidthRange").value
-            }
-
-            ctx.stroke()
+            currentLine = result[1].length - 1
+            change()
         }
+    } else {
+        document.getElementById("inctruction_tip").hidden = false
+        alert("Выберите файл и нажмите \"Отправить\"")
     }
 }
 function increment() {
-    if (currentLine < result[0].length - 1) {
+    if (currentLine < result[1].length - 1) {
         currentLine++
         
-        clearCanvas()
-        
+        change()
         if (result[1][currentLine][0] + 91 > 360) {
             from = result[1][currentLine][0] - 269
         }
@@ -74,10 +72,6 @@ function increment() {
         else {
             to = result[1][currentLine][1] + 91
         }
-
-        ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
-        ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
-        ctx.stroke()
 
 
         document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
@@ -86,11 +80,9 @@ function increment() {
 function decrement() {
     if (currentLine > 0) {
         currentLine--
-        clearCanvas()
-        ctx.moveTo(result[0][currentLine][0][0], result[0][currentLine][0][1])
-        ctx.lineTo(result[0][currentLine][1][0], result[0][currentLine][1][1])
-        ctx.stroke()
-
+        
+        change()
+        
         if (result[1][currentLine][0] + 91 > 360) {
             from = result[1][currentLine][0] - 269
         }
@@ -103,7 +95,14 @@ function decrement() {
         else {
             to = result[1][currentLine][1] + 91
         }
+
         document.getElementById("instruct1").innerText = "Шаг " + (currentLine + 1) + ": " + from + " - " + to
+    } else {
+        clearCanvas()
+        ctx.lineWidth = document.getElementById("lineWidthRange").value
+        ctx.moveTo(result[0][0][0][0], result[0][0][0][1]);
+        ctx.lineTo(result[0][0][1][0], result[0][0][1][1]);
+        ctx.stroke()
     }
 }
 
@@ -116,8 +115,8 @@ function lock() {
     document.getElementById("lineNumRange").setAttribute("disabled", "")
 }
 function createInstructionButtons() {
-    document.getElementById("instructionButtonNext").innerHTML = "<button>next</button>"
-    document.getElementById("instructionButtonPrevious").innerHTML = "<button>previous</button>"
+    document.getElementById("instructionButtonNext").innerHTML = "<button class=\"button\">Следующий шаг</button>"
+    document.getElementById("instructionButtonPrevious").innerHTML = "<button class=\"button\">Предыдущий шаг</button>"
     document.getElementById("instructionButtonPrevious").setAttribute("onclick", "decrement()")
     document.getElementById("instructionButtonNext").setAttribute("onclick", "increment()")
 }
@@ -170,14 +169,21 @@ ctx.setLineDash([0])
 var result
 function change() {
     if (result) {
-        afterResponse(result)
+        clearCanvas()
+        ctx.lineWidth = document.getElementById("lineWidthRange").value
+        for (var i = 0; i <= currentLine; i++) {
+            ctx.moveTo(result[0][i][0][0], result[0][i][0][1]);
+            ctx.lineTo(result[0][i][1][0], result[0][i][1][1]);
+            
+        }
+        ctx.stroke()
     }
 }
 function afterResponse(succes) {
     currentLine = 0
     if (document.getElementById("checkbox").checked) {
         createInstructionButtons()
-
+        document.getElementById("inctruction_tip").hidden = false
     }
     document.getElementById("loader").setAttribute("class", "y")
     
@@ -213,7 +219,6 @@ const upload = (file) => {
         response => response.json() // if the response is a JSON object
     ).then(
         succes => afterResponse(succes)
-        //succes => afterResponse(succes)
     ).catch(
         error => console.log(error) // Handle the error response object
     );
@@ -235,5 +240,3 @@ submit.addEventListener("click", onSelectFile, false)
 
 // submit.addEventListener("click", clearCanvas, false)
 // Add a listener on your input
-// It will be triggered when a file will be selected
-

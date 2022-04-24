@@ -1,29 +1,16 @@
 body {
 	background-color: grey;
-	background: linear-gradient(90deg,#4290bd, #dfe0e0);/* #C9D6FF #E2E2E2 #92aaf7,white */
+	background: linear-gradient(90deg,#73bbe4, #dfe0e0);/* #C9D6FF #E2E2E2 #92aaf7,white */
 	background-size: 200% 200%;
 	animation: gradient 10s ease infinite; 
 }
-a.button8 {
-	display: inline-block;
-	color: black;
-	font-weight: 700;
-	text-decoration: none;
-	user-select: none;
-	padding: .5em 2em;
-	outline: none;
-	border: 2px solid;
-	border-radius: 1px;
-	transition: 0.2s;
-} 
-a.button8:hover { background: #ffee70; }
-a.button8:active { background: white; }
 
 
 .custumizator{
     display: flex;
     flex-direction: column;
     justify-content: center;
+	margin-top: 1em;
 }
 .submit{
     width: 90px;
@@ -46,15 +33,6 @@ canvas {
 .text{
     width: 30px;
 }
-/*.divcustum{
-
-    position: absolute;
-    bottom: 120px;
-    right: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}*/
 .all{
     height: 50px;
 }
@@ -76,7 +54,7 @@ canvas {
 
 
     border: 10px solid #7d7d7d; /* Dark grey */
-    border-top: 10px solid #ffea00; /* Yellow */
+    border-top: 10px solid #ff8800; /* Orange */
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -92,13 +70,24 @@ canvas {
     flex-direction: row;
 	justify-self: center;
     justify-content: center;
-	
+	margin-top: .5em;
 }
 .instruction{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+}
+.instruction1{
+	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
+#instruct1 {
+	font-weight: bold;
+	font-size: 20px;
+}
 
 .instruction2 {
 	font-weight: bold;
@@ -139,14 +128,18 @@ canvas {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%; 
-	background: #f5af0c;
+	background: #ff8800;
 	cursor: pointer;
 }
-	
-.slider::-moz-range-thumb {
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-	background: #f5af0c;	
-	cursor: pointer;
+
+
+.button {
+	transition-duration: 0.4s;
+	background-color: #dfe0e0;
+	color: black;
+  }
+  
+.button:hover {
+	background-color: #ff8800;
+	color:white
 }
