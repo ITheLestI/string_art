@@ -164,8 +164,6 @@ ctx.setLineDash([0])
 
 
 
-
-
 var result
 function change() {
     if (result) {
@@ -195,7 +193,6 @@ function afterResponse(succes) {
     ctx.closePath()
 }
 
-// Select your input type file and store it in a variable
 const input = document.getElementById('file');
 // This will upload the file after having read it
 const upload = (file) => {
@@ -208,13 +205,10 @@ const upload = (file) => {
     formData.append('json', JSON.stringify(settings));
     console.log("sending")
 
-    fetch(ip, { // Your POST endpoint
+    fetch(ip, {
         method: 'POST',
-        body: formData, // This is your file object
-        // headers: {
-        //     "Accept": "application/json",
-        //     "Content-Type": "application/json"
-        // }
+        body: formData,
+
     }).then(
         response => response.json() // if the response is a JSON object
     ).then(
@@ -225,7 +219,6 @@ const upload = (file) => {
 };
 
 
-// Event handler executed when a file is selected
 const onSelectFile = () => {
     if (input.files[0]) {
         
@@ -237,6 +230,3 @@ const onSelectFile = () => {
 };
 const submit = document.getElementById("filesend")
 submit.addEventListener("click", onSelectFile, false)
-
-// submit.addEventListener("click", clearCanvas, false)
-// Add a listener on your input

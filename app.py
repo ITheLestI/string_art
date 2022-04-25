@@ -7,10 +7,10 @@ import os
 app = Flask(__name__)
 app.secret_key = "erfgLKJKLJGKLkjLKLGjlSSLKDgjl"
 
-imgRadius = 190
-numPins = 360
+imgRadius = 190 # 600-1000 for good quality
+numPins = 360 # 720
 initPin = 270
-numLines = 100
+numLines = 100 # 4000-6000 for good quality
 imgPath = 'pictures/t.jpg'
 minLoop = 5
 lineWeight = 11
